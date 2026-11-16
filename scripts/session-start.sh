@@ -42,4 +42,5 @@ if [ "$total" -gt "$max" ]; then
   echo "[gemkeeper] Ledger truncated at $max of $total lines. It is too long: prune it during the next sweep."
 fi
 echo "--- end ledger ---"
+echo "[gemkeeper] The ledger is not read-only: keep it current in this session. When the user states a rule, a decision with its reason, a dead end or a non-obvious fact, add it right away (update the existing bullet on that topic instead of adding a second one)."
 exit 0

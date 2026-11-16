@@ -37,8 +37,10 @@ Not gems: file contents, long code, step-by-step history, things already committ
 Use the template in `references/ledger-template.md`. Rules:
 
 - One fact per bullet, one or two lines. Prefer exact identifiers: paths, function names, commands, error strings.
-- Decisions: `<decision> — because <reason>`. Dead ends: `<tried> → <result/why it failed>`.
-- **Edit in place, never just append.** Update a bullet when it changes; delete it when it stops being true.
+- Decisions: `<decision> — because <reason>`. Dead ends: `<tried> (by whom, when; still in the code or reverted?) → <why it failed>`.
+- **One topic, one bullet.** Before adding, search the ledger for the topic and update that bullet instead of adding a second one.
+- **Edit in place, never just append.** Update a bullet when it changes; delete it when it stops being true. When a value changes (test count, port, version), replace the old value; never leave both.
+- Leave out what the code, the diff or a file already shows: data values, raw measurements that drove no decision, implementation details.
 - Hard cap: about 120 lines. If over, merge and prune. Oldest resolved items go first.
 - `## Now` is always rewritten, never accumulated. It holds the current state and **one** next step.
 - Mark anything the user said explicitly with `(user)`. Those bullets outrank your own inferences.
@@ -51,15 +53,22 @@ Whenever something passes the ledger test, update the ledger right away with a s
 edit, then carry on with the task. Don't announce it beyond a short note like `(gem saved)`.
 Don't batch gems "for later". Later is when context is bloated and details are already blurred.
 
-When a `[gemkeeper] checkpoint` reminder appears, glance back over the turns since the last
-checkpoint, save anything that passes the test, and continue. If nothing qualifies, do nothing.
+Side remarks are the easiest gems to lose: "heads-up", "by the way", "for later", "I tried X last week".
+Capture them even when the current task doesn't need them.
+
+When a `[gemkeeper] gem check` appears, the user's message probably holds a gem: compare it with the
+ledger and save what is missing **before** starting the task. When a `[gemkeeper] checkpoint` reminder
+appears, glance back over the turns since the last checkpoint, save anything that passes the test,
+and continue. If nothing qualifies, do nothing.
+
+A new session continues the same ledger. The injected ledger is not read-only: keep capturing.
 
 ### 2. Sweep (user says "gems", "sweep", "handoff", "save progress", or a context warning appears)
 
 A full pass before a reset:
 
 1. Read the current `.gemkeeper/ledger.md` (create it from the template if missing).
-2. Walk the conversation for gems not yet captured, especially dead ends, reasons behind decisions, and anything the user stated as a rule.
+2. Go through **every user message** in the conversation, one by one, and check each against the ledger: rules ("never", "always", "don't"), reasons ("because"), dead ends ("tried", "didn't work"), side remarks and gotchas (flaky tests, ports, commands, "heads-up"). Then do the same for your own discoveries: approaches that failed, non-obvious facts.
 3. Verify claims about state against reality where cheap: `git status`, `git log -5 --oneline`, whether the files you mention exist.
 4. Rewrite `## Now`: what is done, what is half-done (with file paths), and the single next step.
 5. Prune: remove stale or duplicated bullets and stay under the cap.
