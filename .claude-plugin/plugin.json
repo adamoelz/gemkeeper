@@ -1,0 +1,32 @@
+{
+  "name": "gemkeeper",
+  "displayName": "Gemkeeper",
+  "version": "0.1.0",
+  "description": "Never kill a good session again. Keeps a tiny, always-current ledger of the mission-critical context (rules, decisions + why, dead ends, next step) and re-injects it after /clear or compaction.",
+  "author": {
+    "name": "Adam Ölz",
+    "url": "https://github.com/adamoelz"
+  },
+  "homepage": "https://github.com/adamoelz/gemkeeper",
+  "repository": "https://github.com/adamoelz/gemkeeper",
+  "license": "MIT",
+  "keywords": ["context", "compaction", "handoff", "memory", "session", "ledger", "context-window"],
+  "userConfig": {
+    "nudge_every": {
+      "type": "number",
+      "title": "Checkpoint every N prompts",
+      "description": "Remind Claude every N prompts to save new gems to the ledger. 0 turns checkpoints off.",
+      "default": 6,
+      "min": 0,
+      "max": 100
+    },
+    "warn_tokens": {
+      "type": "number",
+      "title": "Sweep warning at (tokens)",
+      "description": "When the context reaches this many tokens, Claude does a full sweep and tells you it's safe to /clear. 0 turns the warning off.",
+      "default": 100000,
+      "min": 0,
+      "max": 2000000
+    }
+  }
+}

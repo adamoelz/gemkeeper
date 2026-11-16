@@ -1,0 +1,15 @@
+{
+  "name": "gemkeeper",
+  "description": "Gemkeeper: never kill a good Claude Code session again.",
+  "owner": {
+    "name": "Adam Ölz",
+    "url": "https://github.com/adamoelz"
+  },
+  "plugins": [
+    {
+      "name": "gemkeeper",
+      "source": "./",
+      "description": "Keeps a tiny, always-current ledger of mission-critical session context and re-injects it after /clear or compaction."
+    }
+  ]
+}
