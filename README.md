@@ -135,7 +135,7 @@ once under `/plugin` → Marketplaces → gemkeeper → *Enable auto-update*, or
 | | What you get | What's missing |
 |---|---|---|
 | [Skill-only edition](editions/skill-only) (for the Claude plugin directory) | Skill + `/gemkeeper:resume` command, no code runs on your machine | No automatic loading: run `/gemkeeper:resume` after every `/clear` or new session. No hook reminders, no token-based sweep warning. Not benchmarked yet. |
-| Skill only, any agent with skills (Cursor, Codex, …): `npx skills add https://github.com/adamoelz/gemkeeper/tree/main/editions/skill-only` | The same skill as the skill-only edition | Same as above; ask your agent to "resume from the ledger" after a reset |
+| Skill only via [skills.sh](https://skills.sh/adamoelz/gemkeeper/gems), any agent with skills (Claude Code, Cursor, Codex, …): `npx skills add https://github.com/adamoelz/gemkeeper --skill gems` | The `gems` skill; without hooks it checks each message for gems itself | No automatic loading: ask your agent to "resume from the ledger" after a reset. No token-based sweep warning. Not benchmarked yet. |
 | Manual install of the full version: `git clone` this repo, then `./install.sh --hooks` | Same as the recommended plugin | Updates by hand: `git pull && ./install.sh --hooks` |
 
 Install only **one** of these. The full plugin and the skill-only edition both bring a `gems` skill.

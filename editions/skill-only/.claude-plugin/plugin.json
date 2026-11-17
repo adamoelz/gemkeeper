@@ -1,7 +1,7 @@
 {
   "name": "gemkeeper",
   "displayName": "Gemkeeper",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Never kill a good session again. Claude keeps a tiny, always-current ledger of the mission-critical context (rules, decisions and why, dead ends, next step), so you can /clear a bloated session and pick up at full quality with /gemkeeper:resume.",
   "author": {
     "name": "Adam Ölz",

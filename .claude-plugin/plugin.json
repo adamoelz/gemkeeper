@@ -1,7 +1,7 @@
 {
   "name": "gemkeeper",
   "displayName": "Gemkeeper",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Never kill a good session again. Keeps a tiny, always-current ledger of the mission-critical context (rules, decisions + why, dead ends, next step) and re-injects it after /clear or compaction.",
   "author": {
     "name": "Adam Ölz",
