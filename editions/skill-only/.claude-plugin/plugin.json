@@ -9,6 +9,17 @@
   },
   "homepage": "https://github.com/adamoelz/gemkeeper",
   "repository": "https://github.com/adamoelz/gemkeeper",
+  "documentationUrl": "https://github.com/adamoelz/gemkeeper/blob/main/editions/skill-only/README.md",
+  "supportUrl": "https://github.com/adamoelz/gemkeeper/issues",
+  "privacyPolicyUrl": "https://github.com/adamoelz/gemkeeper/blob/main/editions/skill-only/PRIVACY.md",
   "license": "MIT",
-  "keywords": ["context", "compaction", "handoff", "memory", "session", "ledger", "context-window"]
+  "keywords": [
+    "context",
+    "compaction",
+    "handoff",
+    "memory",
+    "session",
+    "ledger",
+    "context-window"
+  ]
 }
