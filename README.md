@@ -29,7 +29,14 @@
 </p>
 
 <p align="center"><img src="docs/demo.gif" width="720" alt="Demo: a rule is saved to the ledger, the session bloats to 146k tokens, /clear, then the same request without gemkeeper adds a forbidden dependency while gemkeeper stops and cites the rule"></p>
-<p align="center"><sub>Rendered from <a href="https://github.com/adamoelz/gemkeeper-bench">gemkeeper-bench</a> outputs (abridged), not a screen recording.</sub></p>
+
+**Install** (in Claude Code):
+
+```
+/plugin marketplace add adamoelz/gemkeeper
+/plugin install gemkeeper@gemkeeper
+/reload-plugins
+```
 
 ---
 
@@ -98,8 +105,6 @@ and the harness to rerun it):
   (30/30 in 3 of 3 runs), carrying only ~2.6k tokens into the next session.
 - **`/compact` is strong too** (29–30/30) but only inside one session and at ~17k tokens.
   A handoff summary lost the *why* and the dead ends (25/30). No memory: 0/30.
-- **The price:** the continuous capture costs about +11% during the session (with a wide spread between
-  runs). Bringing that further down is next.
 
 <sub>gemkeeper 0.2.1 (`8979dab`), Sonnet via `claude -p`, one synthetic scenario; limitations in the
 [results](https://github.com/adamoelz/gemkeeper-bench/blob/main/RESULTS.md).</sub>
@@ -110,15 +115,8 @@ and the harness to rerun it):
 
 This is the version the [benchmark](#benchmark) measured. Only this one loads the ledger automatically
 after `/clear`, compaction and in new sessions, and reminds Claude to save gems while you work.
-In Claude Code:
-
-```
-/plugin marketplace add adamoelz/gemkeeper
-/plugin install gemkeeper@gemkeeper
-/reload-plugins
-```
-
-(Or simply start a new session instead of `/reload-plugins`.)
+Run the three commands from the [top of this page](#gemkeeper) in Claude Code
+(or simply start a new session instead of `/reload-plugins`).
 
 **Check that everything loaded:** `/hooks` should list three gemkeeper hooks (SessionStart,
 UserPromptSubmit, PreCompact), and `/gemkeeper:gems` should autocomplete. If Claude Code mentions two
@@ -183,7 +181,7 @@ Works well *alongside* `/compact` and CLAUDE.md: CLAUDE.md is for project-wide t
 
 **Should I commit `.gemkeeper/`?** Your call. Ignored by default (in `.gitignore`). Commit it if your team should share the context of a mission.
 
-**Does it cost tokens?** Some. Saving gems while you work adds model steps: about **+11%** cost in the [benchmark](#benchmark) (with a wide spread between runs). On a reset the next session starts with the ledger, ~1–3k tokens instead of ~17k for a `/compact` summary, so you can reset earlier and more often.
+**Does it cost tokens?** Some. Saving gems while you work adds a few model steps. On a reset the next session starts with the ledger, ~1–3k tokens instead of ~17k for a `/compact` summary, so you can reset earlier and more often.
 
 **Parallel sessions in one repo?** gemkeeper uses one ledger per project. Set `GEMKEEPER_LEDGER` per terminal if you run several missions in parallel.
 
