@@ -18,6 +18,10 @@
   <a href="#faq">FAQ</a>
 </p>
 
+<p align="center">
+  <a href="#benchmark"><img src="docs/tokens.svg" width="820" alt="gemkeeper carries ~2.6k tokens into the next session and still knows 30 of 30 planted facts: 85% fewer tokens than /compact, 98% fewer than no reset"></a>
+</p>
+
 <!-- TODO before launch: record a 15–20s GIF (long session → /gems → /clear → new session picks up instantly),
      save it as docs/demo.gif and uncomment the next line.
 <p align="center"><img src="docs/demo.gif" width="720" alt="demo"></p>
@@ -32,7 +36,7 @@ picked SQLite, the three approaches that already failed. Then the context fills 
 
 - **Keep going.** Quality drifts as the window bloats. Old instructions fade.
 - **`/clear` or let it compact.** `/clear` throws everything away. Compaction keeps a lot, but as a
-  ~15k-token summary that only lives inside this one session: tomorrow's session starts from zero.
+  ~17k-token summary that only lives inside this one session: tomorrow's session starts from zero.
 
 Handoff skills help, but they run **at the end**, when the context is already at its biggest and the
 details are already blurred.
@@ -86,13 +90,14 @@ Plain bash. No dependencies, no network, no telemetry.
 and a blind judge scores what the next session still knows ([gemkeeper-bench](https://github.com/adamoelz/gemkeeper-bench), all raw data
 and the harness to rerun it):
 
-- **gemkeeper 0.2.0 kept all 15** after a reset into a fresh session, also across two fresh sessions
-  (30/30 in 3 of 3 runs), from a ledger of ~1.5k tokens.
-- **`/compact` is strong too** (29–30/30) but only inside one session and at ~15k tokens.
+- **gemkeeper 0.2.1 kept all 15** after a reset into a fresh session, also across two fresh sessions
+  (30/30 in 3 of 3 runs), carrying only ~2.6k tokens into the next session.
+- **`/compact` is strong too** (29–30/30) but only inside one session and at ~17k tokens.
   A handoff summary lost the *why* and the dead ends (25/30). No memory: 0/30.
-- **The price:** the continuous capture costs about +21% during the session. Bringing that down is next.
+- **The price:** the continuous capture costs about +11% during the session (with a wide spread between
+  runs). Bringing that further down is next.
 
-<sub>gemkeeper 0.2.0 (`bc3a01c`), Sonnet via `claude -p`, one synthetic scenario; limitations in the
+<sub>gemkeeper 0.2.1 (`8979dab`), Sonnet via `claude -p`, one synthetic scenario; limitations in the
 [results](https://github.com/adamoelz/gemkeeper-bench/blob/main/RESULTS.md).</sub>
 
 ## Install
@@ -157,7 +162,7 @@ Plugin users: `/plugin` → gemkeeper → configure. Manual install: environment
 | When context is captured | At compaction | At the end of the session | **Continuously, while details are fresh** |
 | Facts kept after a reset ([benchmark](#benchmark)) | 29–30 of 30 | 25 of 30, loses the *why* and dead ends | **30 of 30** |
 | Survives `/clear` and new sessions | No | Only if you paste it | **Re-injected automatically** |
-| Size carried over | ~15k tokens | ~2k tokens | **~1.5k tokens** |
+| Tokens carried into the next session | ~17k | ~3k | **~2.6k** |
 | Manual step needed | No | Yes (copy/paste or command) | **No** |
 
 Works well *alongside* `/compact` and CLAUDE.md: CLAUDE.md is for project-wide truths, the ledger is for the current mission.
