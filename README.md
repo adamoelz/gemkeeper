@@ -13,6 +13,7 @@
 <p align="center">
   <a href="#install">Install</a> ·
   <a href="#how-it-works">How it works</a> ·
+  <a href="#benchmark">Benchmark</a> ·
   <a href="examples/ledger.example.md">Example ledger</a> ·
   <a href="#faq">FAQ</a>
 </p>
@@ -30,8 +31,8 @@ You finally have a session where Claude *gets it*. It knows the weird test setup
 picked SQLite, the three approaches that already failed. Then the context fills up and you have two bad options:
 
 - **Keep going.** Quality drifts as the window bloats. Old instructions fade.
-- **`/clear` or let it auto-compact.** The summary keeps the broad picture and quietly drops the
-  *why*, the dead ends, and the one rule you said 80 messages ago.
+- **`/clear` or let it compact.** `/clear` throws everything away. Compaction keeps a lot, but as a
+  ~15k-token summary that only lives inside this one session: tomorrow's session starts from zero.
 
 Handoff skills help, but they run **at the end**, when the context is already at its biggest and the
 details are already blurred.
@@ -69,12 +70,31 @@ flowchart LR
 
 - **Skill `gems`.** Teaches Claude what counts as a gem, the format, and four modes: capture, sweep, resume, close.
 - **SessionStart hook.** Re-injects the ledger after `/clear`, after auto-compaction, and on a new session.
-  After compaction it tells Claude the ledger outranks the lossy summary.
-- **UserPromptSubmit hook.** A one-line checkpoint every 6 prompts, plus a single warning when the
-  context passes ~100k tokens (read from the real API usage in the transcript).
+  After compaction it tells Claude the ledger outranks the compaction summary.
+- **UserPromptSubmit hook.** When your message looks like it holds a gem (a rule, a reason, a dead end,
+  a gotcha; English and German), a one-line *gem check*. Otherwise a checkpoint every 6 prompts, plus a
+  single warning when the context passes ~100k tokens (read from the real API usage in the transcript).
+- **Stop hook.** If a turn with a gem check ends without a ledger change, Claude is asked once to save it.
 - **PreCompact hook.** Tells the compactor not to waste summary space on what the ledger already holds.
 
 Plain bash. No dependencies, no network, no telemetry.
+
+## Benchmark
+
+<p align="center"><img src="docs/benchmark.svg" width="800" alt="Recall after a session reset: gemkeeper vs /compact, handoff and no memory"></p>
+
+15 facts are planted in a scripted 20-turn Claude Code session, the session is reset in different ways,
+and a blind judge scores what the next session still knows ([gemkeeper-bench](https://github.com/adamoelz/gemkeeper-bench), all raw data
+and the harness to rerun it):
+
+- **gemkeeper 0.2.0 kept all 15** after a reset into a fresh session, also across two fresh sessions
+  (30/30 in 3 of 3 runs), from a ledger of ~1.5k tokens.
+- **`/compact` is strong too** (29–30/30) but only inside one session and at ~15k tokens.
+  A handoff summary lost the *why* and the dead ends (25/30). No memory: 0/30.
+- **The price:** the continuous capture costs about +21% during the session. Bringing that down is next.
+
+<sub>gemkeeper 0.2.0 (`bc3a01c`), Sonnet via `claude -p`, one synthetic scenario; limitations in the
+[results](https://github.com/adamoelz/gemkeeper-bench/blob/main/RESULTS.md).</sub>
 
 ## Install
 
@@ -97,6 +117,11 @@ npx skills add adamoelz/gemkeeper
 git clone https://github.com/adamoelz/gemkeeper && cd gemkeeper
 ./install.sh --hooks   # installs the skill + merges hooks into ~/.claude/settings.json (backup made)
 ```
+
+**Updating.** Plugins from third-party marketplaces don't auto-update by default. Turn it on once under
+`/plugin` → Marketplaces → gemkeeper → *Enable auto-update*, or update by hand with
+`claude plugin update gemkeeper@gemkeeper` (then `/reload-plugins` or start a new session).
+Manual installs: `git pull && ./install.sh --hooks`.
 
 ## Usage
 
@@ -131,9 +156,9 @@ Plugin users: `/plugin` → gemkeeper → configure. Manual install: environment
 | | Built-in `/compact` | Handoff skills | **gemkeeper** |
 |---|---|---|---|
 | When context is captured | At compaction | At the end of the session | **Continuously, while details are fresh** |
-| Keeps the *why* and dead ends | Often lost | Depends on the prompt | **First-class sections** |
-| Survives auto-compaction | n/a | Only if you ran it in time | **Re-injected automatically** |
-| Stays small | Yes | Often grows big | **Ledger test + ~120-line cap** |
+| Facts kept after a reset ([benchmark](#benchmark)) | 29–30 of 30 | 25 of 30, loses the *why* and dead ends | **30 of 30** |
+| Survives `/clear` and new sessions | No | Only if you paste it | **Re-injected automatically** |
+| Size carried over | ~15k tokens | ~2k tokens | **~1.5k tokens** |
 | Manual step needed | No | Yes (copy/paste or command) | **No** |
 
 Works well *alongside* `/compact` and CLAUDE.md: CLAUDE.md is for project-wide truths, the ledger is for the current mission.
