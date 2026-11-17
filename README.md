@@ -19,7 +19,7 @@
 </p>
 
 <p align="center">
-  <a href="#benchmark"><img src="docs/tokens.svg" width="820" alt="gemkeeper carries ~2.6k tokens into the next session and still knows 30 of 30 planted facts: 85% fewer tokens than /compact, 98% fewer than no reset"></a>
+  <a href="#benchmark"><img src="docs/tokens.svg" width="640" alt="gemkeeper carries ~2.6k tokens into the next session and still knows 30 of 30 planted facts: 85% fewer tokens than /compact, 98% fewer than no reset"></a>
 </p>
 
 <!-- TODO before launch: record a 15–20s GIF (long session → /gems → /clear → new session picks up instantly),
@@ -84,7 +84,7 @@ Plain bash. No dependencies, no network, no telemetry.
 
 ## Benchmark
 
-<p align="center"><img src="docs/benchmark.svg" width="800" alt="Recall after a session reset: gemkeeper vs /compact, handoff and no memory"></p>
+<p align="center"><img src="docs/benchmark.svg" width="640" alt="Recall after a session reset: gemkeeper vs /compact, handoff and no memory"></p>
 
 15 facts are planted in a scripted 20-turn Claude Code session, the session is reset in different ways,
 and a blind judge scores what the next session still knows ([gemkeeper-bench](https://github.com/adamoelz/gemkeeper-bench), all raw data
