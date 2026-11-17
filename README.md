@@ -109,6 +109,9 @@ and the harness to rerun it):
 /plugin install gemkeeper@gemkeeper
 ```
 
+If Claude Code mentions two unset options, nothing to do: the defaults apply (checkpoint every 6 prompts,
+sweep warning at ~100k tokens). See [Configuration](#configuration).
+
 **Skill only (no automatic re-injection, works with any agent that supports skills):**
 
 ```bash
@@ -171,9 +174,9 @@ Works well *alongside* `/compact` and CLAUDE.md: CLAUDE.md is for project-wide t
 
 **Should I commit `.gemkeeper/`?** Your call. Ignored by default (in `.gitignore`). Commit it if your team should share the context of a mission.
 
-**Does it cost tokens?** A little: the ledger (~1–2k tokens) on reset, and ~50 tokens per checkpoint. In exchange you can reset much earlier and much more often.
+**Does it cost tokens?** Some. Saving gems while you work adds model steps: about **+11%** cost in the [benchmark](#benchmark) (with a wide spread between runs). On a reset the next session starts with the ledger, ~1–3k tokens instead of ~17k for a `/compact` summary, so you can reset earlier and more often.
 
-**Parallel sessions in one repo?** v0.1 uses one ledger per project. Set `GEMKEEPER_LEDGER` per terminal if you run several missions in parallel.
+**Parallel sessions in one repo?** gemkeeper uses one ledger per project. Set `GEMKEEPER_LEDGER` per terminal if you run several missions in parallel.
 
 **Windows?** Works in Git Bash, which Claude Code uses on Windows.
 
