@@ -19,6 +19,13 @@
 </p>
 
 <p align="center">
+  <a href="#install"><img src="https://img.shields.io/badge/Claude_Code-plugin-D97757?logo=claude&logoColor=white" alt="Claude Code plugin"></a>
+  <a href="https://skills.sh/adamoelz/gemkeeper"><img src="https://skills.sh/b/adamoelz/gemkeeper" alt="skills.sh"></a>
+  <a href="https://github.com/adamoelz/gemkeeper-bench"><img src="https://img.shields.io/badge/benchmark-30%2F30_facts_after_%2Fclear-34D399" alt="Benchmark: 30/30 facts after /clear"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue" alt="MIT license"></a>
+</p>
+
+<p align="center">
   <a href="#benchmark"><img src="https://raw.githubusercontent.com/adamoelz/gemkeeper-bench/90778f806a84c7974b7135e9c6fd3f32a635984a/results/tokens.svg" width="640" alt="gemkeeper carries ~2.6k tokens into the next session and still knows 30 of 30 planted facts: 85% fewer tokens than /compact, 98% fewer than no reset"></a>
 </p>
 
