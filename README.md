@@ -22,10 +22,8 @@
   <a href="#benchmark"><img src="https://raw.githubusercontent.com/adamoelz/gemkeeper-bench/90778f806a84c7974b7135e9c6fd3f32a635984a/results/tokens.svg" width="640" alt="gemkeeper carries ~2.6k tokens into the next session and still knows 30 of 30 planted facts: 85% fewer tokens than /compact, 98% fewer than no reset"></a>
 </p>
 
-<!-- TODO before launch: record a 15–20s GIF (long session → /gems → /clear → new session picks up instantly),
-     save it as docs/demo.gif and uncomment the next line.
-<p align="center"><img src="docs/demo.gif" width="720" alt="demo"></p>
--->
+<p align="center"><img src="docs/demo.gif" width="720" alt="Demo: a rule is saved to the ledger, the session bloats to 146k tokens, /clear, then the same request without gemkeeper adds a forbidden dependency while gemkeeper stops and cites the rule"></p>
+<p align="center"><sub>Rendered from <a href="https://github.com/adamoelz/gemkeeper-bench">gemkeeper-bench</a> outputs (abridged), not a screen recording.</sub></p>
 
 ---
 
