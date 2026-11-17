@@ -78,23 +78,9 @@ gk_prompt() {
 # Words that usually mark a gem: rules, reasons, dead ends, gotchas (English + German).
 GK_GEM_RE='(^|[^[:alpha:]])(never|always|must|mustn.t|don.t|do not|not allowed|forbidden|no new|policy|because|the reason|tried|didn.t work|doesn.t work|did not work|won.t work|failed|broke|turns out|turned out|dead end|outdated|flaky|heads.up|gotcha|workaround|quirk|careful|beware|decided|decision|port [0-9]+|nie|niemals|immer|weil|darf nicht|versucht|funktioniert nicht|achtung|vorsicht|entschieden|stellt sich heraus)([^[:alpha:]]|$)'
 
+# Question sentences ("what did we decide and why?") ask for gems, they don't state them: drop them first.
 gk_looks_like_gem() {
-  gk_prompt | grep -Eiq "$GK_GEM_RE"
-}
-
-# Checksum of the ledger, to tell whether it changed during a turn.
-gk_ledger_sum() {
-  if [ -f "$GK_LEDGER" ]; then cksum < "$GK_LEDGER" | cut -d' ' -f1; else echo none; fi
-}
-
-# Read / set one key in the per-session state file.
-gk_state_get() {
-  [ -f "$GK_STATE" ] && sed -n "s/^$1=//p" "$GK_STATE" | head -n 1
-}
-gk_state_set() {
-  local tmp="$GK_STATE.tmp"
-  { [ -f "$GK_STATE" ] && grep -v "^$1=" "$GK_STATE"; printf '%s=%s\n' "$1" "$2"; } > "$tmp" 2>/dev/null \
-    && mv -f "$tmp" "$GK_STATE"
+  gk_prompt | sed -E 's/[^.!?]*[?]//g' | grep -Eiq "$GK_GEM_RE"
 }
 
 # Tidy up state files from old sessions (best effort, quiet).

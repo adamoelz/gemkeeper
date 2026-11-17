@@ -74,7 +74,6 @@ flowchart LR
 - **UserPromptSubmit hook.** When your message looks like it holds a gem (a rule, a reason, a dead end,
   a gotcha; English and German), a one-line *gem check*. Otherwise a checkpoint every 6 prompts, plus a
   single warning when the context passes ~100k tokens (read from the real API usage in the transcript).
-- **Stop hook.** If a turn with a gem check ends without a ledger change, Claude is asked once to save it.
 - **PreCompact hook.** Tells the compactor not to waste summary space on what the ledger already holds.
 
 Plain bash. No dependencies, no network, no telemetry.

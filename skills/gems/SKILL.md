@@ -56,8 +56,11 @@ Don't batch gems "for later". Later is when context is bloated and details are a
 Side remarks are the easiest gems to lose: "heads-up", "by the way", "for later", "I tried X last week".
 Capture them even when the current task doesn't need them.
 
-When a `[gemkeeper] gem check` appears, the user's message probably holds a gem: compare it with the
-ledger and save what is missing **before** starting the task. When a `[gemkeeper] checkpoint` reminder
+When a `[gemkeeper] gem check` appears, the user's message probably holds a gem: save what is missing
+**in the same step as your first action** of the turn: one Bash command that inserts the bullet under its
+heading (for example `sed -i '/^## Rules/a - ...' .gemkeeper/ledger.md` with GNU sed; adapt to the platform), issued as a parallel tool call
+next to that action. No extra step and no Read before it: you know the ledger from the session start and
+your own edits. Duplicates are merged in the next sweep. When a `[gemkeeper] checkpoint` reminder
 appears, glance back over the turns since the last checkpoint, save anything that passes the test,
 and continue. If nothing qualifies, do nothing.
 

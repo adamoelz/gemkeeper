@@ -23,17 +23,6 @@
         ]
       }
     ],
-    "Stop": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "bash \"${CLAUDE_PLUGIN_ROOT}/scripts/stop-check.sh\"",
-            "timeout": 10
-          }
-        ]
-      }
-    ],
     "PreCompact": [
       {
         "matcher": "manual|auto",

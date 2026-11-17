@@ -27,21 +27,17 @@ if [ "$last_warn" -gt 0 ] && [ "$tokens" -lt $(( last_warn / 2 )) ]; then
 fi
 
 message=""
-pending=0
 if [ "$warn" -gt 0 ] && [ "$tokens" -ge "$warn" ] \
    && { [ "$last_warn" -eq 0 ] || [ "$tokens" -ge $(( last_warn + last_warn / 4 )) ]; }; then
   k=$(( tokens / 1000 ))
   message="[gemkeeper] Context is at ~${k}k tokens. Before you answer, run a gems sweep (update .gemkeeper/ledger.md, rewrite '## Now'). Then handle the request and end your reply with one line telling the user it is safe to /clear."
   last_warn="$tokens"
 elif gk_looks_like_gem; then
-  message="[gemkeeper] gem check: this message likely states a rule, a decision and its reason, a dead end or a non-obvious fact. If something in it passes the ledger test and is not in .gemkeeper/ledger.md yet, add it first (one small edit, keep the reason, mark it (user)), then do the task."
-  pending=1
+  message="[gemkeeper] gem check: this message likely states a rule, a decision and its reason, a dead end or a non-obvious fact. If something in it passes the ledger test and is not in .gemkeeper/ledger.md yet, save it with one Bash command that inserts the bullet under its heading (keep the reason, mark it (user)), run in parallel with your first action of this turn, not as a separate step and without reading the ledger first."
 elif [ "$every" -gt 0 ] && [ $(( count % every )) -eq 0 ]; then
   message="[gemkeeper] checkpoint: if anything since the last checkpoint passes the ledger test (a fresh session would get it wrong without it), save it to .gemkeeper/ledger.md in one small edit, then continue. If nothing qualifies, do nothing and don't mention it."
 fi
 
-# pending + ledger_sum let the Stop hook check whether a likely gem was actually saved this turn.
-printf 'count=%s\nlast_warn=%s\npending=%s\nledger_sum=%s\n' "$count" "$last_warn" "$pending" "$(gk_ledger_sum)" \
-  > "$GK_STATE" 2>/dev/null || true
+printf 'count=%s\nlast_warn=%s\n' "$count" "$last_warn" > "$GK_STATE" 2>/dev/null || true
 [ -n "$message" ] && echo "$message"
 exit 0
