@@ -20,7 +20,7 @@
 
 <p align="center">
   <a href="#install"><img src="https://img.shields.io/badge/Claude_Code-plugin-D97757?logo=claude&logoColor=white" alt="Claude Code plugin"></a>
-  <a href="https://skills.sh/adamoelz/gemkeeper/gems"><img src="https://img.shields.io/badge/skills.sh-gems-000000" alt="skills.sh: gems"></a>
+  <a href="https://skills.sh/adamoelz/gemkeeper/gems"><img src="https://img.shields.io/badge/skills.sh-gems-059669" alt="skills.sh: gems"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue" alt="MIT license"></a>
 </p>
 
