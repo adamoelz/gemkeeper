@@ -1,0 +1,14 @@
+{
+  "name": "gemkeeper",
+  "displayName": "Gemkeeper",
+  "version": "0.2.1",
+  "description": "Never kill a good session again. Claude keeps a tiny, always-current ledger of the mission-critical context (rules, decisions and why, dead ends, next step), so you can /clear a bloated session and pick up at full quality with /gemkeeper:resume.",
+  "author": {
+    "name": "Adam Ölz",
+    "url": "https://github.com/adamoelz"
+  },
+  "homepage": "https://github.com/adamoelz/gemkeeper",
+  "repository": "https://github.com/adamoelz/gemkeeper",
+  "license": "MIT",
+  "keywords": ["context", "compaction", "handoff", "memory", "session", "ledger", "context-window"]
+}
