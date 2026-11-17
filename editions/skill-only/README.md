@@ -28,8 +28,17 @@ Work as usual. When you want to reset:
 ## Benchmark
 
 The [benchmark](https://github.com/adamoelz/gemkeeper#benchmark) numbers (30/30 facts kept after `/clear`,
-~2.6k tokens carried over) were measured with the full version. Results for this edition:
-[gemkeeper-bench](https://github.com/adamoelz/gemkeeper-bench).
+~2.6k tokens carried over) were measured with the full version. This edition hasn't been benchmarked yet;
+results will go to [gemkeeper-bench](https://github.com/adamoelz/gemkeeper-bench).
+
+For the best results, install the full version instead (in Claude Code):
+
+```
+/plugin marketplace add adamoelz/gemkeeper
+/plugin install gemkeeper@gemkeeper
+```
+
+Install only one of the two: both bring a `gems` skill.
 
 ## License
 
