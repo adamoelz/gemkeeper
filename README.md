@@ -11,7 +11,7 @@
 </p>
 
 <p align="center">
-  <a href="#install">Install</a> ·
+  <a href="#quick-install">Install</a> ·
   <a href="#how-it-works">How it works</a> ·
   <a href="#benchmark">Benchmark</a> ·
   <a href="examples/ledger.example.md">Example ledger</a> ·
@@ -19,7 +19,7 @@
 </p>
 
 <p align="center">
-  <a href="#install"><img src="https://img.shields.io/badge/Claude_Code-plugin-D97757?logo=claude&logoColor=white" alt="Claude Code plugin"></a>
+  <a href="#quick-install"><img src="https://img.shields.io/badge/Claude_Code-plugin-D97757?logo=claude&logoColor=white" alt="Claude Code plugin"></a>
   <a href="https://skills.sh/adamoelz/gemkeeper/gems"><img src="https://img.shields.io/badge/skills.sh-gems-059669" alt="skills.sh: gems"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue" alt="MIT license"></a>
 </p>
@@ -30,7 +30,9 @@
 
 <p align="center"><img src="docs/demo.gif" width="720" alt="Demo: a rule is saved to the ledger, the session bloats to 146k tokens, /clear, then the same request without gemkeeper adds a forbidden dependency while gemkeeper stops and cites the rule"></p>
 
-**Install** (in Claude Code):
+## Quick install
+
+In Claude Code:
 
 ```
 /plugin marketplace add adamoelz/gemkeeper
@@ -115,7 +117,7 @@ and the harness to rerun it):
 
 This is the version the [benchmark](#benchmark) measured. Only this one loads the ledger automatically
 after `/clear`, compaction and in new sessions, and reminds Claude to save gems while you work.
-Run the three commands from the [top of this page](#gemkeeper) in Claude Code
+Run the three commands from the [Quick install](#quick-install) in Claude Code
 (or simply start a new session instead of `/reload-plugins`).
 
 **Check that everything loaded:** `/hooks` should list three gemkeeper hooks (SessionStart,
